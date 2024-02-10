@@ -1,0 +1,17 @@
+<%= form_with model: task do |f| %>
+  <div class="box">
+    <div class="field">
+      <%= f.label :title, 'Title', class: 'label' %>
+      <%= f.text_field :title, :class => 'input', style: 'margin-bottom:10px;' %>
+    </div>
+    <div class="field">
+      <%= f.label :description, "Description", class: 'label' %>
+      <%= f.text_area :description,  :class => 'input', style: 'margin-bottom:10px;'  %>
+    </div>
+    <div class="field">
+      <%= f.label :status, "Status", class: 'label'%>
+      <%= f.select(:status, options_for_select(@statuses), {}, { class: 'dropdown' }) %>
+    </div>
+    <%= f.submit :class => 'button is-primary' %>
+  </div>
+<% end %>

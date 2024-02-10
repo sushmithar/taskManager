@@ -1,0 +1,9 @@
+<div>
+  <h1><%= @task.title %></h1>
+  <h4><%= "(#{@task.status})" %></h4>
+</div>
+<p><%= @task.description %></p>
+
+<ul>
+  <li><%= link_to "Edit", edit_task_path(@task) %></li>
+</ul>
