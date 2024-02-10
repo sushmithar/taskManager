@@ -1,0 +1,7 @@
+<div style="padding:15px; width:50%">
+<h1 class="title">Edit Task</h1>
+  <% if flash[:notice].present? %>
+    <div> <%= content_tag :h5, flash[:notice] %></div>
+  <% end %>
+  <%= render "task_form", task: @task , statuses: @statuses %>
+</div>

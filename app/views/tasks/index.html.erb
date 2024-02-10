@@ -1,0 +1,80 @@
+
+<div>
+    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+			<div class="navbar-brand">
+				<a class="navbar-item">
+				Task Manager	
+				</a>
+			</div>
+			<div class="navbar-end">
+				<div class="navbar-item">
+					<div class="buttons" style="display: flex; justify-content:center;">
+					<figure class="image is-48x48">
+					<%= image_tag @current_user.avatar.url(:thumb), class:"is-rounded" %>
+					</figure>
+					<%= button_to "Sign Out", {:controller => :user_sessions,
+					    :action => 'destroy', :id => @current_user.id}, :method => :delete, :class=>'button is-small is-dark' %>
+					</div>
+				</div>
+    	</div>
+    </nav>
+    <div style="padding:10;" >
+        <div class ="box">
+          <%= label_tag 'status', 'Status' %>
+					<%= select_tag "status", options_for_select(@statuses) %>
+					<%= hidden_field_tag 'user_id', @current_user.id  %>
+					<%= button_tag 'Search', type: 'button', id: "search" %>
+					<%= link_to "Create Task", new_task_path, :class=>'button is-small is-dark', :style=>'float:right;' %>
+        </div>
+    </div>
+    <div style="padding: 15px;">
+        <table class="table is-bordered is-fullwidth">                         
+            <tr>                          
+                <th>Title</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+						<% if @tasks.present? %>
+							<% @tasks.each do |task| %>
+									<tr>
+											<td><%= task.title %></td>
+											<td><%= task.description %></td>
+											<td><span class="has-text-weight-bold"><%= task.status %></span></td>
+											<td>
+												<%= link_to "Edit", edit_task_path(task.id) %>|
+												<%= link_to "Destroy", task_path(task.id), data: {
+															turbo_method: :delete,
+															turbo_confirm: "Are you sure?"
+													} %>
+											</td>
+									</tr>
+							<% end %>
+						<% else %>
+						  <tr>
+								<td colspan=4 style="text-align:center;">No task created</td>
+							</tr>
+						<% end %>
+        </table>  
+    </div>
+</div>
+<script type="javascript">
+	$(document).ready(function() {
+		$("#search").click(function(){
+        alert("button");
+    });
+		# $("#search").click(function(){
+		# 	$.ajax({
+		# 		type: "GET", 
+		# 		url: "tasks/fetch_tasks",
+		# 		data: {
+		# 			user_id: <%= @current_user.id %>,
+		# 			status: $('status').val();
+		# 		},
+		# 		success: function(data, textStatus, jqXHR){
+					
+		# 		}
+		# 	})
+		# }); 
+	});
+</script>

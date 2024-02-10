@@ -1,0 +1,24 @@
+<div style="padding:15px">
+	<h1 class="title">Sign Up</h1>
+	<%= form_for @user, url: users_path, html: { multipart: true } do |f| %>
+		<%= f.file_field :avatar %>
+			<div class="box" style="width:50%; padding: 15px;">
+				<div class="field">
+					<%= f.label :name, class: "label important" %>
+					<%= f.text_field :name, placeholder: "Username", class: "input" %>
+				</div>
+				<div class="field">
+					<%= f.label :email, class: "label important" %>
+					<%= f.text_field :email, placeholder: "Email", class: "input" %>
+				</div>
+				<div class="field">
+					<%= f.label :password, class: "label important" %>
+					<%= f.password_field :password, placeholder: "Password", class: "input" %>
+				</div>
+				<% if flash[:notice] %>
+					<%= content_tag :h1, flash[:notice], class: "has-text-danger" %>
+				<% end %>
+				<%= f.submit "Create Account", class: "button is-small is-dark"%>
+			</div>
+	<% end %>
+</div>
